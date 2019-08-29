@@ -13,7 +13,7 @@ const { dbConnect } = require('./db-mongoose');
 
 
 passport.use(localStrategy);
-passport.use(jwtStrategy);
+passport.use(jtwStrategy);
 
 const app = express();
 
