@@ -49,7 +49,7 @@ router.post('/', (req, res, next) => {
   // of security by storing extra **unused** info
   const sizedFields = {
     username: { min: 1 },
-    password: { min: 8, max: 72 }
+    password: { min: 6, max: 72 }
   };
 
   const tooSmallField = Object.keys(sizedFields).find(
@@ -95,6 +95,7 @@ router.post('/', (req, res, next) => {
       return User.create(newUser);
     })
     .then(result => {
+      console.log(result,"results")
       return res
         .status(201)
         .location(`/api/users/${result.id}`)

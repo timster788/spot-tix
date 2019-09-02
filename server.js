@@ -5,10 +5,10 @@ const passport = require('passport');
 const localStrategy = require('./passport/localStrategy')
 const jtwStrategy = require('./passport/jwt')
 
-const userRouter = require('./models/user')
+const userRouter = require('./routes/users')
 const authRouter = require('./routes/auth');
 
-const { PORT, CLIENT_ORIGIN } = require('./config');
+const { PORT, CLIENT_ORIGIN ,MONGODB_URI } = require('./config');
 const { dbConnect } = require('./db-mongoose');
 
 
@@ -64,6 +64,29 @@ app.use((req, res, next) => {
     dbConnect();
     runServer();
   }
+  // Listen for incoming connections
+// if (require.main === module) {
+//   // Connect to DB and Listen for incoming connections
+//   mongoose
+//     .connect(MONGODB_URI)
+//     .then(instance => {
+//       const conn = instance.connections[0];
+//       console.info(
+//         `Connected to: mongodb://${conn.host}:${conn.port}/${conn.name}`
+//       );
+//     })
+//     .catch(err => {
+//       console.error(err);
+//     })
+//     .then(() => {
+//       app
+//         .listen(PORT, function() {
+//           console.info(`Server listening on ${this.address().port}`);
+//         })
+//         .on('error', err => {
+//           console.error(err);
+//         });
+//     });
   
   module.exports = { app };
 
